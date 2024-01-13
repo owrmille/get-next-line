@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iatopchu <iatopchu@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/13 16:12:01 by iatopchu          #+#    #+#             */
+/*   Updated: 2024/01/13 16:14:01 by iatopchu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
@@ -5,7 +17,6 @@
 #  define BUFFER_SIZE 1
 # endif
 
-// # include <string.h>
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
