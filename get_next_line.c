@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iatopchu <iatopchu@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/13 16:12:07 by iatopchu          #+#    #+#             */
+/*   Updated: 2024/01/13 16:12:08 by iatopchu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*read_line(int fd, char *buffer, char *leftover)
@@ -5,10 +17,9 @@ char	*read_line(int fd, char *buffer, char *leftover)
 	int		read_elements;
 	char	*temp;
 
-	read_elements = 1;
+	read_elements = read(fd, buffer, BUFFER_SIZE);
 	while (read_elements > 0)
 	{
-		read_elements = read(fd, buffer, BUFFER_SIZE);
 		if (read_elements == -1)
 		{
 			if (leftover)
@@ -16,8 +27,6 @@ char	*read_line(int fd, char *buffer, char *leftover)
 			leftover = NULL;
 			return (NULL);
 		}
-		else if (read_elements == 0)
-			return (leftover);
 		buffer[read_elements] = '\0';
 		temp = leftover;
 		leftover = ft_strjoin(temp, buffer);
@@ -26,6 +35,7 @@ char	*read_line(int fd, char *buffer, char *leftover)
 		temp = NULL;
 		if (ft_strchr(leftover, '\n'))
 			break ;
+		read_elements = read(fd, buffer, BUFFER_SIZE);
 	}
 	return (leftover);
 }
@@ -41,7 +51,7 @@ char	*divide_line(char **leftover)
 		i++;
 	temp = *leftover;
 	line = ft_substr(temp, 0, i + 1);
-	*leftover = ft_substr(temp, i + 1, ft_strlen(*leftover) - 1);
+	*leftover = ft_substr(temp, i + 1, ft_strlen(temp) - 1);
 	if (temp)
 		free(temp);
 	temp = NULL;
@@ -68,7 +78,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	if (!leftover)
-		leftover = ft_strdup("");
+		leftover = ft_strdup("\0");
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);

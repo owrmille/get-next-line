@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iatopchu <iatopchu@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/13 16:11:46 by iatopchu          #+#    #+#             */
+/*   Updated: 2024/01/13 16:11:47 by iatopchu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 int	ft_strlen(const char	*str)
@@ -80,7 +92,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (s == NULL)
 		return (NULL);
 	if (start >= (unsigned int)ft_strlen(s))
-		return (ft_strdup(""));
+		return (NULL);
 	subs_len = ft_strlen(s) - start;
 	if (len > subs_len)
 		len = subs_len;
