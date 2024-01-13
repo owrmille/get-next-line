@@ -20,68 +20,68 @@
 
 // possible options for test_<function_name>: [test_fill_line, test_set_line, test_get_next_line]
 
-int *test_set_line(int fd)
-{
-	char *buffer;
-	char *leftover;
-	int read_elements = 1;
-	int iteration_number = 1;
-	int max_numbers = 3;
+// int *test_set_line(int fd)
+// {
+// 	char *buffer;
+// 	char *leftover;
+// 	int read_elements = 1;
+// 	int iteration_number = 1;
+// 	int max_numbers = 3;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		free(buffer);
+// 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+// 	if (!buffer)
+// 		free(buffer);
 
-	while ((read_elements > 0) & (iteration_number <= max_numbers))
-	{
-		read_elements = read(fd, buffer, BUFFER_SIZE);
-		buffer[read_elements] = '\0';
-		printf("Iteration number: %d\n", iteration_number);
-		printf("Initial buffer: %s\n", buffer);
-		leftover = set_line(buffer);
-		printf("Changed buffer: %s\n", buffer);
-		printf("New leftover: %s\n\n", leftover);
-		iteration_number++;
-	}
-	if (buffer)
-		free(buffer);
-	if (leftover)
-		free(leftover);
-	return (0);
-}
+// 	while ((read_elements > 0) & (iteration_number <= max_numbers))
+// 	{
+// 		read_elements = read(fd, buffer, BUFFER_SIZE);
+// 		buffer[read_elements] = '\0';
+// 		printf("Iteration number: %d\n", iteration_number);
+// 		printf("Initial buffer: %s\n", buffer);
+// 		leftover = divide_line(buffer);
+// 		printf("Changed buffer: %s\n", buffer);
+// 		printf("New leftover: %s\n\n", leftover);
+// 		iteration_number++;
+// 	}
+// 	if (buffer)
+// 		free(buffer);
+// 	if (leftover)
+// 		free(leftover);
+// 	return (0);
+// }
 
-int *test_fill_line(int fd)
-{
-	char *buffer;
-	char *leftover = "|THIS IS LEFTOVER|";
-	char *empty_leftover = "";
-	// char *empty_leftover = NULL;
-	char *filled_line;
-	int iteration_number = 1;
-	int max_numbers = 3;
+// int *test_fill_line(int fd)
+// {
+// 	char *buffer;
+// 	char *leftover = "|THIS IS LEFTOVER|";
+// 	char *empty_leftover = "";
+// 	// char *empty_leftover = NULL;
+// 	char *filled_line;
+// 	int iteration_number = 1;
+// 	int max_numbers = 3;
 
-	int leftover_flg = 0;
+// 	int leftover_flg = 0;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		free(buffer);
+// 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+// 	if (!buffer)
+// 		free(buffer);
 
-	while (iteration_number <= max_numbers)
-	{
-		if (leftover_flg == 1)
-			filled_line = fill_line(fd, leftover, buffer);
-		else if (leftover_flg == 0)
-			filled_line = fill_line(fd, empty_leftover, buffer);
+// 	while (iteration_number <= max_numbers)
+// 	{
+// 		if (leftover_flg == 1)
+// 			filled_line = read_line(fd, leftover, buffer);
+// 		else if (leftover_flg == 0)
+// 			filled_line = read_line(fd, empty_leftover, buffer);
 
-		printf("Filled line: %s\n\n", filled_line);
-		iteration_number++;
-	}
-	if (buffer)
-		free(buffer);
-	if (filled_line)
-		free(filled_line);
-	return (0);
-}
+// 		printf("Filled line: %s\n\n", filled_line);
+// 		iteration_number++;
+// 	}
+// 	if (buffer)
+// 		free(buffer);
+// 	if (filled_line)
+// 		free(filled_line);
+// 	return (0);
+// }
 
 int test_get_next_line(int fd)
 {
@@ -116,19 +116,19 @@ int main(int argc, char **argv)
 		printf("Testing get_next_line\n\n");
 		test_get_next_line(fd);
 	}
-	else if (argc == 3)
-	{
-		if (!strcmp(argv[2], "test_set_line"))
-		{
-			printf("Testing set_line\n\n");
-			test_set_line(fd);
-		}
-		else if (!strcmp(argv[2], "test_fill_line"))
-		{
-			printf("Testing fill_line\n\n");
-			test_fill_line(fd);
-		}
-	}
+	// else if (argc == 3)
+	// {
+	// 	if (!strcmp(argv[2], "test_set_line"))
+	// 	{
+	// 		printf("Testing set_line\n\n");
+	// 		test_set_line(fd);
+	// 	}
+	// 	else if (!strcmp(argv[2], "test_fill_line"))
+	// 	{
+	// 		printf("Testing fill_line\n\n");
+	// 		test_fill_line(fd);
+	// 	}
+	// }
 	close(fd);
 	return (0);
 }

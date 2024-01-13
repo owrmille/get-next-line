@@ -11,8 +11,8 @@
 # include <unistd.h>
 
 char		*get_next_line(int fd);
-char		*set_line(char *line);
-char		*fill_line(int fd, char *leftover, char *buffer);
+char		*divide_line(char **leftover);
+char		*read_line(int fd, char *buffer, char *leftover);
 int			ft_strlen(const char	*str);
 char		*ft_strchr(const char	*s, int c);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);

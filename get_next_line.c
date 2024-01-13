@@ -13,12 +13,12 @@ char	*read_line(int fd, char *buffer, char *leftover)
 		{
 			if (leftover)
 				free(leftover);
-			if (buffer)
-				free(buffer);
+			leftover = NULL;
 			return (NULL);
 		}
 		else if (read_elements == 0)
 			return (leftover);
+		buffer[read_elements] = '\0';
 		temp = leftover;
 		leftover = ft_strjoin(temp, buffer);
 		if (temp)
@@ -30,9 +30,28 @@ char	*read_line(int fd, char *buffer, char *leftover)
 	return (leftover);
 }
 
-char	*divide_line(char *line)
+char	*divide_line(char **leftover)
 {
-	return ();
+	int		i;
+	char	*line;
+	char	*temp;
+
+	i = 0;
+	while ((*leftover)[i] != '\0' && (*leftover)[i] != '\n')
+		i++;
+	temp = *leftover;
+	line = ft_substr(temp, 0, i + 1);
+	*leftover = ft_substr(temp, i + 1, ft_strlen(*leftover) - 1);
+	if (temp)
+		free(temp);
+	temp = NULL;
+	if (!line)
+	{
+		if (*leftover)
+			free(*leftover);
+		*leftover = NULL;
+	}
+	return (line);
 }
 
 char	*get_next_line(int fd)
@@ -43,10 +62,9 @@ char	*get_next_line(int fd)
 
 	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || fd < 0)
 	{
-		if (buffer)
-			free(buffer);
 		if (leftover)
 			free(leftover);
+		leftover = NULL;
 		return (NULL);
 	}
 	if (!leftover)
@@ -54,10 +72,12 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	line = read_line(fd, buffer, leftover);
-	if (!line)
+	leftover = read_line(fd, buffer, leftover);
+	if (!leftover)
 		return (NULL);
-	leftover = divide_line(line);
+	line = divide_line(&leftover);
+	if (buffer)
+		free(buffer);
+	buffer = NULL;
 	return (line);
 }
-
