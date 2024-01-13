@@ -6,7 +6,7 @@
 /*   By: iatopchu <iatopchu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:12:07 by iatopchu          #+#    #+#             */
-/*   Updated: 2024/01/13 16:12:08 by iatopchu         ###   ########.fr       */
+/*   Updated: 2024/01/13 17:08:38 by iatopchu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*divide_line(char **leftover)
 		i++;
 	temp = *leftover;
 	line = ft_substr(temp, 0, i + 1);
-	*leftover = ft_substr(temp, i + 1, ft_strlen(temp) - 1);
+	*leftover = ft_substr(temp, i + 1, ft_strlen(temp));
 	if (temp)
 		free(temp);
 	temp = NULL;
